@@ -23,6 +23,10 @@ mongoose.connect(process.env.DB_CONNECT)
 
 app.use('/', TodoItemRoute);
 
+app.use(express.static(path.join(__dirname,"./client/frontend/build")));
+app.get("*", (req,res)=>{
+    res.sendFile(path.join(__dirname, "./client/frontend/build/index.html"));
+})
 
 //Add port and connect to server
 app.listen(PORT, ()=>console.log("Server connected..."));
